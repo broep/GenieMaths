@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Maths Genie</title>
+    <link rel="stylesheet" href="resources/css/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700,900" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--<link rel="icon" href="./favicon.png" type="image/x-icon">-->
+    <link rel="stylesheet" href="resources/css/style.css">
+  </head>
+  <body>
+    <!-- No need for a header, jump straight into the game-->
+    <header>
+      <!-- nothing goes here just yet -->
+    </header>
+
+    <div class="container">
+      <!-- Start of the first row -->
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
+          <h1>Maths Game</h1>
+          <h4>Rules</h4>
+          <p>Select the level, the algebraic function, the numbers and whether to order the list before pressing start</p>
+          <h4>If you are stuck, click on hint</h4>
+          <p>The fastest time will be recorded</p>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <div class="algebra">
+            <h1>Select Your Options</h1>
+            <ul>
+              <li><a href="#" class="active btn">+</a></li>
+              <li><a href="#" class="btn">-</a></li>
+              <li><a href="#" class="btn">multiply</a></li><!--&#215-->
+              <li><a href="#" class="btn">divide</a></li><!--&#247-->
+            </ul>
+          </div>
+          <div class="number">
+            <ul>
+              <li class="active btn">1</li>
+              <li class="btn">2</li>
+              <li class="btn">3</li>
+              <li class="btn">4</li>
+              <li class="btn">5</li>
+              <li class="btn">6</li>
+              <li class="btn">7</li>
+              <li class="btn">8</li>
+              <li class="btn">9</li>
+              <li class="btn">10</li>
+              <li class="btn">11</li>
+              <li class="btn">12</li>
+            </ul>
+          </div>
+          <div class="order">
+            <ul>
+              <li><a href="#" class="active btn">Ordered</a></li>
+              <li><a href="#" class="btn">Random</a></li>
+            </ul>
+
+          </div>
+        </div>
+        <div class="btn">
+          start
+        </div>
+<!-- Timer -->
+        <div class="timer">
+          timer
+        </div>
+
+        <!-- Problems go here -->
+        <div class="col-xs-12 problem">2 x 3 = <input type="text" name="" value="">        </div>
+
+        <div class="col-xs-12 problem">2 x 3 = <input type="text" name="" value="">        </div>
+
+        <div class="col-xs-12 problem">2 x 3 = <input type="text" name="" value="">        </div>
+
+        <div class="col-xs-12 problem">
+          <p class="numbers">2</p>
+          <p class="sign">x</p>
+          <p class="numbers">3</p>
+          <p class="equals">=</p> <input type="text" name="" value="">        </div>
+
+
+        <div class="col-xs-12 problem">2 x 3 = <input type="text" name="" value="">        </div>
+
+        <div class="col-xs-12 problem">2 x 3 = <input type="text" name="" value="">        </div>
+
+
+        <div class="col-xs-12" id="game">
+
+        </div>
+        <div class="col-xs-12" id="congratulations">
+
+        </div>
+      </div>
+
+      <footer>
+
+      </footer>
+
+    <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="resources/js/math-genie.js"></script>
+    <script type="text/javascript" src="resources/js/tests.js"></script>
+  </body>
+</html>
