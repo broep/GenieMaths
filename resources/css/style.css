@@ -4,11 +4,12 @@ body {
 
 .btn {
   display: inline-block;
+  align-items: center;
   border-radius: 4px;
   padding: 10px 15px;
   color: gray;
   text-align: center;
-  margin-top: 15px;
+
   border: 1px solid gray;
 }
 
@@ -36,6 +37,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-items: center;
 }
 .order ul {
   display: flex;
@@ -49,6 +51,11 @@ li {
 
 li:first-child {
   margin-left: 0;
+}
+
+.number {
+  display: flex;
+  align-items: center;
 }
 
 .number .active {
@@ -70,4 +77,12 @@ li:first-child {
 .numbers:first-child {
 
   margin-left: 0px;
+}
+
+.answer.hidden {
+  display: none;
+}
+
+.answer {
+  display: inline-block;
 }
