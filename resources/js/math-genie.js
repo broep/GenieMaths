@@ -50,82 +50,99 @@ $(document).ready(() => {
   });
 
   $('.btn.start').on('click', event => {
-    var problemValues = MathGenie.generateValues(num, mfunction, sort);
-    console.log(problemValues);
-    var answers = MathGenie.generateAnswers(num, mfunction, problemValues);
-    console.log(answers);
-    MathGenie.renderProblems(num, problemValues, answers, mfunction, $game);
+    var table = MathGenie.generateTable(num, mfunction, sort);
+    console.log(table);
+    MathGenie.renderTable(table, mfunction, $game)
   })
-
-
 
 });
 
-// Return an ordered or random list containing numbers between 1 and 12
-
-MathGenie.generateValues = function (number, sign, sort) {
-  var problems = [];
-  var problemValues = [];
-
-  for (var value = 1; value <= 12; value++) {
-    problems.push(value);
-  }
-
-  if (sort === "Ordered") {
-    problemValues = problems;
-  } else {
-    while (problems.length > 0) {
-      var randomIndex = Math.floor(Math.random() * problems.length);
-      var randomValue = problems.splice(randomIndex, 1)[0];
-      problemValues.push(randomValue);
-    }
-  }
-
-  return problemValues;
-};
 
 // Return the list of answers to coincide with the list of values
 
-MathGenie.generateAnswers = function (number, sign, problemValues) {
-  var answers = [];
-  for (var value = 0; value <= 11; value++) {
-    answers[value] = number * problemValues[value];
-  };
-  return answers;
-};
+MathGenie.generateTable = function (number, sign, sort) {
+  var orderedTable = [];
+  var table = [];
 
-MathGenie.renderProblems = function(number, problems, answers, sign, $game) {
+  switch(sign) {
+    case '+':
+        for (var value = 0; value <= 12; value++) {
+          var x = number;
+          var y = value;
+          var answer = x+y;
+          var problem = [x, y, answer]
+          table.push(problem);
+        }
+        break;
+    case '-':
+        for (var value = 0; value <= 12; value++) {
+          var x = number + value;
+          var y = number;
+          var answer = x-y;
+          var problem = [x, y, answer]
+          table.push(problem);
+        }
+        break;
+    case 'x':
+        for (var value = 0; value <= 12; value++) {
+          var x = number;
+          var y = value;
+          var answer = x*y;
+          var problem = [x, y, answer]
+          table.push(problem);
+        }
+        break;
 
+    case '÷':
+        for (var value = 0; value <= 12; value++) {
+          var x = number * value;
+          var y = number;
+          var answer = x/y;
+          var problem = [x, y, answer]
+          table.push(problem);
+        }
+        break;
+    default:
+        break;
+  }
+
+  if (sort === "Ordered") {
+    orderedTable = table;
+  } else {
+    while (table.length > 0) {
+      var randomIndex = Math.floor(Math.random() * table.length);
+      var randomValue = table.splice(randomIndex, 1)[0];
+      orderedTable.push(randomValue);
+    }
+  }
+  return orderedTable;
+}
+
+
+MathGenie.renderTable = function (table, sign, $game) {
   $game.empty();
-  //$game.data('flippedCards', []); /*Keep track of flipped cards*/
- console.log('in the renderProblems function')
-  for (var valueIndex = 0; valueIndex < problems.length; valueIndex++) {
-    var value = problems[valueIndex];
-    var answer = answers[valueIndex];
+  for (var valueIndex = 0; valueIndex < table.length; valueIndex++) {
+    var x = table[valueIndex][0];
+    var y = table[valueIndex][1];
+    var answer = table[valueIndex][2];
     var data = {
-      number: number,
-      value: value,
-      answer: answer,
-      sign: sign
+      x: x,
+      sign: sign,
+      y: y,
+      answer: answer
     };
     console.log(data);
 
-    var $problemElement = $('<div class="problem col-xs-12"></div>');
-    $problemElement.data(data);
-    var prob = $problemElement.data('number') + " " + $problemElement.data('sign') + " " +
-      $problemElement.data('value') + " = ";
-    $problemElement.text(prob);
-    $problemElement.html(prob + '<input type="number" name="" value="">' + '<span class = "answer hidden">' + answer + '</span>');
+    var $tableElement = $('<div class="problem col-xs-12"></div>');
+    $tableElement.data(data);
+    var prob = $tableElement.data('x') + " " + $tableElement.data('sign') + " " +
+      $tableElement.data('y') + " = ";
+    $tableElement.text(prob);
+    $tableElement.html(prob + '<input type="number" name="" value="">' + '<span class = "answer hidden">' + $tableElement.data('answer') + '</span>');
 
-    $game.append($problemElement );
-
+    $game.append($tableElement );
     $('.problem input').on('focusout', event => {
       $(event.currentTarget).next('.answer').removeClass('hidden');
-
-
     });
-
   };
-
-
-};
+}

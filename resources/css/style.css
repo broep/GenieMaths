@@ -44,9 +44,16 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
 }
+
+.settings ul {
+  display: flex;
+  justify-content: flex-start;
+}
+
 li {
   display: inline;
   margin-left: 10px;
+
 }
 
 li:first-child {
@@ -64,6 +71,7 @@ li:first-child {
 
 .problem {
   display: flex;
+  justify-content: center;
 }
 
 .numbers, .sign, .equals {
@@ -82,6 +90,7 @@ li:first-child {
 .answer.hidden {
   display: none;
 }
+
 
 .answer {
   display: inline-block;
