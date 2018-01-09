@@ -5,26 +5,29 @@ $(document).ready(() => {
   var $game = $('#game');
   var numbers = [];
   var mathFunction = "";
-  var num, mfunction, sort = "Ordered";
+  var num = 2;
+  var mfunction = "+";
+  var sort = "Ordered";
 
   $('.btn.function').on('click', event => {
     mfunction = $(event.currentTarget).html();
+    $('.summary').html(mfunction + " " + num + " " + sort);
     console.log(mfunction);
     $(event.currentTarget).siblings().removeClass('active');// clear active class from all siblings
     $(event.currentTarget).addClass('active'); // make the current target active
-
   });
 
   $('.btn.a').on('click', event => {
-    $(event.currentTarget).toggleClass('active');
+    $(event.currentTarget).toggleClass('active'); 
     num = parseInt($(event.currentTarget).html());
     console.log(num);
+    $('.summary').html(mfunction + " " + num + " " + sort);
     // Limit to only one number selection
     $(event.currentTarget).siblings().removeClass('active');// clear active class from all siblings
-    $(event.currentTarget).addClass('active'); // make the current target active
+    //$(event.currentTarget).addClass('active'); // make the current target active
 
-// Sarted this bit of code to allow more than one number to be selected
-/*
+    // Sarted this bit of code to allow more than one number to be selected
+    /*
     if ($(event.currentTarget).hasClass("active")) {
       // This means is now active so add the value to the variable
       console.log(num);
@@ -40,6 +43,7 @@ $(document).ready(() => {
     $(event.currentTarget).toggleClass('active');
     sort = $(event.currentTarget).html();
     console.log(sort);
+    $('.summary').html(mfunction + " " + num + " " + sort);
     $(event.currentTarget).siblings().removeClass('active');// clear active class from all siblings
     $(event.currentTarget).addClass('active'); // make the current target active
 
@@ -132,17 +136,59 @@ MathGenie.renderTable = function (table, sign, $game) {
       answer: answer
     };
     console.log(data);
+    /*<div class="form-group row">
+      <label for="problem1" class="col-sm-1 col-form-label">6 x 2 =</label>
+      <div class="col-sm-2">
+        <input type="number" class="form-control" id="problem1" placeholder="answer">
+      </div>
+    </div> */
 
-    var $tableElement = $('<div class="problem col-xs-12"></div>');
+    var $tableElement = $('<div class="form-group row"></div>');
+    $tableElement.data(data);
+    var problem = $tableElement.data('x') + " " + $tableElement.data('sign') + " " 
+      + $tableElement.data('y') + " = " + '<span class="problem' +valueIndex + ' hidden">' + $tableElement.data('answer') + "</span>";
+    var $labelElement = $('<label for="problem' + valueIndex + '" class="col-xs-4 col-sm-2 col-md-2 col-form-label">' + problem + '</label>');
+    var $answerDiv = $('<div class="col-xs-4 col-sm-2 col-md-2"></div');
+    var $answerInput = $('<input type="number" class="problem form-control" id="problem' + valueIndex + '" placeholder="answer">');
+    
+    $answerDiv.html($answerInput);
+    $tableElement.html($labelElement);
+    $tableElement.append($answerDiv);
+
+    $game.append($tableElement);
+
+
+
+    /* var $tableElement = $('<div class="problem col-xs-12"></div>');
     $tableElement.data(data);
     var prob = $tableElement.data('x') + " " + $tableElement.data('sign') + " " +
       $tableElement.data('y') + " = ";
     $tableElement.text(prob);
     $tableElement.html(prob + '<input type="number" name="" value="">' + '<span class = "answer hidden">' + $tableElement.data('answer') + '</span>');
 
-    $game.append($tableElement );
-    $('.problem input').on('focusout', event => {
+    $game.append($tableElement );*/
+    /*$('.problem input').on('focusout', event => {
       $(event.currentTarget).next('.answer').removeClass('hidden');
-    });
+    });*/
+
   };
+
+  $('.problem.form-control').on('focusout', event => {
+    console.log(event.currentTarget);
+    var id = '.' + event.currentTarget.id;
+    console.log(id); 
+    var i = id.substring(8);
+    console.log(i);
+    console.log(table[i][2]);
+
+    $(id).removeClass('hidden');
+    if (parseInt($(event.currentTarget).val()) === table[i][2]) {
+      $(event.currentTarget).addClass('correct');
+      $(event.currentTarget).removeClass('incorrect');
+    } else {
+      $(event.currentTarget).addClass('correct');
+      $(event.currentTarget).removeClass('incorrect');
+    }
+
+  });
 }

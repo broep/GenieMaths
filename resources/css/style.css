@@ -2,6 +2,11 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+.container {
+  background-color: #e9ecef;
+  border-radius: .3rem;
+}
+
 .btn {
   display: inline-block;
   align-items: center;
@@ -65,9 +70,10 @@ li:first-child {
   align-items: center;
 }
 
-.number .active {
-  background-color: #green;
-  color: #black; }
+/*.number .active {
+  background-color: green;
+  color: black; 
+}*/
 
 .problem {
   display: flex;
@@ -94,4 +100,12 @@ li:first-child {
 
 .answer {
   display: inline-block;
+}
+
+.correct {
+  border-color: lightgreen;
+}
+
+.incorrect {
+  border-color: red;
 }
